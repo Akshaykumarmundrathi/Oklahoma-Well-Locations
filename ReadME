@@ -1,5 +1,3 @@
-```
-
 # Oklahoma Well Locations Extraction and Map
 
 ## 📌 Project Overview
@@ -26,16 +24,16 @@ This project automates the extraction of well location information from Oklahoma
 
 ### 1️⃣ Clone the Repository
 
-```
 git clone https://github.com/Akshaykumarmundrathi/Oklahoma-Well-Locations.git
 cd Oklahoma-Well-Locations
-```
+
+text
 
 ### 2️⃣ Install Dependencies
 
-```
 pip install -r requirements.txt
-```
+
+text
 
 ### 3️⃣ Place the Input PDF
 
@@ -43,9 +41,9 @@ Put your well report PDF (e.g., `PDFs_Well_Location_20250523_140405.pdf`) in the
 
 ### 4️⃣ Run the Extraction Script
 
-```
 python oklahoma_well_location_map.py
-```
+
+text
 
 This will generate the extracted Excel/CSV and interactive map files.
 
