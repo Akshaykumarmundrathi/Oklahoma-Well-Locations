@@ -4,7 +4,7 @@
 
 ## 📌 Project Overview
 
-This project automates the **extraction of well location information** from Oklahoma well report PDFs.  
+This project automates the ***extraction of well location information*** from Oklahoma well report PDFs.  
 It parses metadata such as **County, Section, Township, Range**, and **GPS coordinates** from the reports, then generates:
 
 - 📄 A structured **Excel/CSV** file with all extracted data  
@@ -42,9 +42,7 @@ This helps geologists, data analysts, and environmental researchers efficiently 
 ```bash
 git clone https://github.com/Akshaykumarmundrathi/Oklahoma-Well-Locations.git
 cd Oklahoma-Well-Locations
-````
 
----
 
 ### 2️⃣ Install Dependencies
 
