@@ -1,183 +1,94 @@
-# 🛢️ Oklahoma Well Locations Extraction + Interactive Map
+Here is a simple, well-structured GitHub README you can use for your Oklahoma Well Locations project repository:
 
-## 📘 Overview
-This Python script automates the extraction of **well location details (County, Township, Range, Section, Latitude, Longitude)** from a **PDF report** and generates both:
-1. A **structured CSV file** with parsed data.
-2. An **interactive Folium map (HTML)** showing each well’s location.
+```markdown
+# Oklahoma Well Locations Extraction and Interactive Map
 
-It is designed for **Oklahoma well reports** generated in a standardized format containing “Report for:” headers and `randymajors.org` coordinate links.
+## Overview
 
----
+This project automates the extraction of well location data for Oklahoma wells from PDF reports and visualizes the data on an interactive map.
 
-## ⚙️ Setup Instructions
+It extracts key location details such as County, Township, Range, Section, and geographic coordinates (Latitude and Longitude) directly from the PDFs using Python. Results are saved in structured Excel/CSV files and displayed on a web map.
 
-### 1. Clone or Copy the Script
-Save the provided Python code as:
+## Files and Structure
+
+- `PDFs_Well_Location_20250523_140405.pdf`  
+  Original input PDF containing well reports.
+
+- `oklahoma_well_location_map.py`  
+  Python script that extracts data from the PDF, processes it, and creates the output files and map.
+
+- `oklahoma_wells_text_extract_with_latlon.xlsx` (or `.csv`)  
+  Output spreadsheet with extracted locations and coordinates. Some cells may be blank due to ongoing extraction process.
+
+- `index.html` or `oklahoma_wells_map.html`  
+  The interactive Folium map illustrating well locations, viewable in any modern browser.
+
+- `README.md`  
+  Project documentation (this file).
+
+## Setup and Running
+
+1. Clone the repository:
+
 ```
-oklahoma_well_extractor.py
+git clone https://github.com/Akshaykumarmundrathi/Oklahoma-Well-Locations.git
+cd Oklahoma-Well-Locations
 ```
 
-Ensure the input PDF is in the same folder or update its path in the script.
+2. Install required Python packages:
 
----
-
-### 2. Install Dependencies
-
-Run these commands in your terminal or command prompt:
-
-```bash
+```
 pip install PyMuPDF pytesseract pdf2image pandas openpyxl requests pyproj opencv-python-headless tqdm folium
 ```
 
-> 💡 On Linux (or Google Colab), install Poppler for PDF image processing:
-```bash
+*(On Linux or Google Colab, install Poppler for PDF handling:)*
+
+```
 sudo apt-get -y install poppler-utils
 ```
 
----
+3. Place the input PDF in the project folder or update the `pdf_path` variable in the script accordingly.
 
-### 3. Folder Structure Example
+4. Run the script:
 
 ```
-project_folder/
-│
-├── PDFs_Well_Location_20250523_140405.pdf    # Input PDF
-├── oklahoma_well_extractor.py                # Main script
-├── oklahoma_wells_text_extract_with_latlon.csv  # Generated CSV output
-└── oklahoma_wells_map.html                   # Interactive map output
+python oklahoma_well_location_map.py
 ```
 
----
+This will create the extracted data file and interactive map.
 
-## 🧠 How It Works (Step-by-Step)
+## How to View Results
 
-### 🔹 Step 1 – Imports
-Loads all required libraries for PDF parsing (`PyMuPDF`), regex text extraction, and mapping (`Folium`).
+- Open the generated Excel or CSV file in any spreadsheet application to review the extracted well location data.
 
-### 🔹 Step 2 – File Setup
-Specifies:
-- `pdf_path` → input PDF file  
-- `out_csv` → extracted data file  
-- `out_html` → final interactive map file  
+- Open the generated HTML map file (`index.html` or `oklahoma_wells_map.html`) in a browser to interact with the mapped well locations.
 
-### 🔹 Step 3 – Extract Coordinates
-Uses regex to find latitude and longitude pairs from **randymajors.org** links:
-```
-x=-97.1234&y=35.4567
-```
-These are then converted into `(lat, lon)` floats.
+## Current Limitations
 
-### 🔹 Step 4 – Read Entire PDF
-Reads **all text** from the PDF using `fitz` (PyMuPDF).
+- Extraction is partial; some cells are blank reflecting incomplete parsing.
 
-### 🔹 Step 5 – Split into Reports
-Splits the document into separate blocks starting with `Report for:` to handle multiple well reports.
+- The script relies on certain consistent PDF formats; variations may require adjustments.
 
-### 🔹 Step 6 – Extract Metadata
-For each report block:
-- Parses **County, Section, Township, Range**
-- Detects **coordinate links**
-- Records data in a structured list
+- Coordinates extraction depends on correctly formatted URLs in the PDF.
 
-### 🔹 Step 7 – Save to CSV
-Stores all extracted records in a CSV file:
-```
-oklahoma_wells_text_extract_with_latlon.csv
-```
+- The interactive map only shows wells with valid lat/lon data.
 
-Example output:
-| Report Name | County | Section | Township | Range | Link | Latitude | Longitude |
-|--------------|---------|----------|-----------|--------|-----------|------------|
-| Smith Well #2 | Custer | 12 | 8N | 15W | https://... | 35.4567 | -97.1234 |
+## Next Steps
 
-### 🔹 Step 8 – Generate Folium Map
-Creates an interactive HTML map centered on Oklahoma (`35.4676, -97.5164`) and places markers for each coordinate.
+- Enhance extraction robustness and OCR integration for scanned PDFs.
 
-Output:
-```
-oklahoma_wells_map.html
-```
+- Expand regex patterns to cover different report variations.
 
-Open it in any browser to view pins with popup details:
-- Report name  
-- County, Section, Township, Range  
-- Latitude & Longitude  
+- Improve map features with clustering, filtering, and shapefile overlays.
+
+- Incorporate user interface for manual correction/validation of extracted data.
+
+## Contact and Contributions
+
+Feel free to open issues, suggest improvements, or contribute code via pull requests.
 
 ---
 
-## 📂 Input and Output Files
+*Thank you for your interest in this project!*
 
-| File | Type | Description |
-|------|------|-------------|
-| `PDFs_Well_Location_20250523_140405.pdf` | Input | Original well report PDF |
-| `oklahoma_wells_text_extract_with_latlon.csv` | Output | Extracted structured text + coordinates |
-| `oklahoma_wells_map.html` | Output | Interactive map visualization |
-
----
-
-## 🧩 Script Structure
-
-| Section | Purpose |
-|----------|----------|
-| Step 0 | Dependency installation (manual) |
-| Step 1 | Imports |
-| Step 2 | Input/output configuration |
-| Step 3 | Regex-based coordinate extraction |
-| Step 4 | Read PDF text |
-| Step 5 | Split PDF into report sections |
-| Step 6 | Extract metadata (County, Township, etc.) |
-| Step 7 | Save CSV |
-| Step 8 | Create interactive map |
-
----
-
-## ⚠️ Common Issues & Troubleshooting
-
-| Issue | Cause | Solution |
-|--------|--------|-----------|
-| ❌ `Cannot open PDF` | Wrong file path or missing file | Check `pdf_path` in code or ensure file exists |
-| 🧩 No coordinates extracted | `randymajors.org` link missing or broken syntax | Confirm links have “x=” and “y=” pairs |
-| 📉 Empty CSV | PDF layout differs from expected | Adjust regex patterns for “County”, “Range”, etc. |
-| 🗺️ Map shows no pins | No valid lat/lon values found | Recheck coordinate parsing regex |
-| 💾 Encoding error | Non-standard PDF text encoding | Convert PDF to readable text with OCR or plain text export |
-
----
-
-## 🧪 Example Run
-
-```bash
-python oklahoma_well_extractor.py
 ```
-
-Output:
-```
-✅ Extracted 124 reports. 110 have coordinates.
-✅ Map saved as 'oklahoma_wells_map.html'.
-```
-
----
-
-## 🌍 Final Outputs
-
-### 📄 CSV File
-Viewable in Excel or any text editor:
-```
-Report Name,County,Section,Township,Range,Link,Latitude,Longitude
-```
-
-### 🗺️ Interactive Map
-Open `oklahoma_wells_map.html` in a browser to view clickable well markers.
-
----
-
-## 🧰 Extend & Customize
-- Modify regex to adapt to new report formats.  
-- Replace `Folium` with `Plotly` or `Kepler.gl` for richer mapping.  
-- Integrate with `geopandas` for shapefile overlay or county boundary visualization.
-
----
-
-## 👨‍💻 Author
-**Akshay Kumar Mundrathi**  
-Oklahoma State University  
-Data & AI / Automation / Geospatial Analysis  
