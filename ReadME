@@ -1,10 +1,7 @@
+# 🛢️ Oklahoma Well Locations Extraction + Interactive Map
 
-## 🛢️ Oklahoma Well Locations Extraction + Interactive Map
-
-### 📘 Overview
-
+## 📘 Overview
 This Python script automates the extraction of **well location details (County, Township, Range, Section, Latitude, Longitude)** from a **PDF report** and generates both:
-
 1. A **structured CSV file** with parsed data.
 2. An **interactive Folium map (HTML)** showing each well’s location.
 
@@ -15,9 +12,7 @@ It is designed for **Oklahoma well reports** generated in a standardized format 
 ## ⚙️ Setup Instructions
 
 ### 1. Clone or Copy the Script
-
 Save the provided Python code as:
-
 ```
 oklahoma_well_extractor.py
 ```
@@ -35,7 +30,6 @@ pip install PyMuPDF pytesseract pdf2image pandas openpyxl requests pyproj opencv
 ```
 
 > 💡 On Linux (or Google Colab), install Poppler for PDF image processing:
-
 ```bash
 sudo apt-get -y install poppler-utils
 ```
@@ -58,47 +52,35 @@ project_folder/
 ## 🧠 How It Works (Step-by-Step)
 
 ### 🔹 Step 1 – Imports
-
 Loads all required libraries for PDF parsing (`PyMuPDF`), regex text extraction, and mapping (`Folium`).
 
 ### 🔹 Step 2 – File Setup
-
 Specifies:
-
-* `pdf_path` → input PDF file
-* `out_csv` → extracted data file
-* `out_html` → final interactive map file
+- `pdf_path` → input PDF file  
+- `out_csv` → extracted data file  
+- `out_html` → final interactive map file  
 
 ### 🔹 Step 3 – Extract Coordinates
-
 Uses regex to find latitude and longitude pairs from **randymajors.org** links:
-
 ```
 x=-97.1234&y=35.4567
 ```
-
 These are then converted into `(lat, lon)` floats.
 
 ### 🔹 Step 4 – Read Entire PDF
-
 Reads **all text** from the PDF using `fitz` (PyMuPDF).
 
 ### 🔹 Step 5 – Split into Reports
-
 Splits the document into separate blocks starting with `Report for:` to handle multiple well reports.
 
 ### 🔹 Step 6 – Extract Metadata
-
 For each report block:
-
-* Parses **County, Section, Township, Range**
-* Detects **coordinate links**
-* Records data in a structured list
+- Parses **County, Section, Township, Range**
+- Detects **coordinate links**
+- Records data in a structured list
 
 ### 🔹 Step 7 – Save to CSV
-
 Stores all extracted records in a CSV file:
-
 ```
 oklahoma_wells_text_extract_with_latlon.csv
 ```
@@ -109,58 +91,55 @@ Example output:
 | Smith Well #2 | Custer | 12 | 8N | 15W | https://... | 35.4567 | -97.1234 |
 
 ### 🔹 Step 8 – Generate Folium Map
-
 Creates an interactive HTML map centered on Oklahoma (`35.4676, -97.5164`) and places markers for each coordinate.
 
 Output:
-
 ```
 oklahoma_wells_map.html
 ```
 
 Open it in any browser to view pins with popup details:
-
-* Report name
-* County, Section, Township, Range
-* Latitude & Longitude
+- Report name  
+- County, Section, Township, Range  
+- Latitude & Longitude  
 
 ---
 
 ## 📂 Input and Output Files
 
-| File                                          | Type   | Description                             |
-| --------------------------------------------- | ------ | --------------------------------------- |
-| `PDFs_Well_Location_20250523_140405.pdf`      | Input  | Original well report PDF                |
+| File | Type | Description |
+|------|------|-------------|
+| `PDFs_Well_Location_20250523_140405.pdf` | Input | Original well report PDF |
 | `oklahoma_wells_text_extract_with_latlon.csv` | Output | Extracted structured text + coordinates |
-| `oklahoma_wells_map.html`                     | Output | Interactive map visualization           |
+| `oklahoma_wells_map.html` | Output | Interactive map visualization |
 
 ---
 
 ## 🧩 Script Structure
 
-| Section | Purpose                                   |
-| ------- | ----------------------------------------- |
-| Step 0  | Dependency installation (manual)          |
-| Step 1  | Imports                                   |
-| Step 2  | Input/output configuration                |
-| Step 3  | Regex-based coordinate extraction         |
-| Step 4  | Read PDF text                             |
-| Step 5  | Split PDF into report sections            |
-| Step 6  | Extract metadata (County, Township, etc.) |
-| Step 7  | Save CSV                                  |
-| Step 8  | Create interactive map                    |
+| Section | Purpose |
+|----------|----------|
+| Step 0 | Dependency installation (manual) |
+| Step 1 | Imports |
+| Step 2 | Input/output configuration |
+| Step 3 | Regex-based coordinate extraction |
+| Step 4 | Read PDF text |
+| Step 5 | Split PDF into report sections |
+| Step 6 | Extract metadata (County, Township, etc.) |
+| Step 7 | Save CSV |
+| Step 8 | Create interactive map |
 
 ---
 
 ## ⚠️ Common Issues & Troubleshooting
 
-| Issue                       | Cause                                           | Solution                                                   |
-| --------------------------- | ----------------------------------------------- | ---------------------------------------------------------- |
-| ❌ `Cannot open PDF`         | Wrong file path or missing file                 | Check `pdf_path` in code or ensure file exists             |
-| 🧩 No coordinates extracted | `randymajors.org` link missing or broken syntax | Confirm links have “x=” and “y=” pairs                     |
-| 📉 Empty CSV                | PDF layout differs from expected                | Adjust regex patterns for “County”, “Range”, etc.          |
-| 🗺️ Map shows no pins       | No valid lat/lon values found                   | Recheck coordinate parsing regex                           |
-| 💾 Encoding error           | Non-standard PDF text encoding                  | Convert PDF to readable text with OCR or plain text export |
+| Issue | Cause | Solution |
+|--------|--------|-----------|
+| ❌ `Cannot open PDF` | Wrong file path or missing file | Check `pdf_path` in code or ensure file exists |
+| 🧩 No coordinates extracted | `randymajors.org` link missing or broken syntax | Confirm links have “x=” and “y=” pairs |
+| 📉 Empty CSV | PDF layout differs from expected | Adjust regex patterns for “County”, “Range”, etc. |
+| 🗺️ Map shows no pins | No valid lat/lon values found | Recheck coordinate parsing regex |
+| 💾 Encoding error | Non-standard PDF text encoding | Convert PDF to readable text with OCR or plain text export |
 
 ---
 
@@ -171,7 +150,6 @@ python oklahoma_well_extractor.py
 ```
 
 Output:
-
 ```
 ✅ Extracted 124 reports. 110 have coordinates.
 ✅ Map saved as 'oklahoma_wells_map.html'.
@@ -182,30 +160,24 @@ Output:
 ## 🌍 Final Outputs
 
 ### 📄 CSV File
-
 Viewable in Excel or any text editor:
-
 ```
 Report Name,County,Section,Township,Range,Link,Latitude,Longitude
 ```
 
 ### 🗺️ Interactive Map
-
 Open `oklahoma_wells_map.html` in a browser to view clickable well markers.
 
 ---
 
 ## 🧰 Extend & Customize
-
-* Modify regex to adapt to new report formats.
-* Replace `Folium` with `Plotly` or `Kepler.gl` for richer mapping.
-* Integrate with `geopandas` for shapefile overlay or county boundary visualization.
+- Modify regex to adapt to new report formats.  
+- Replace `Folium` with `Plotly` or `Kepler.gl` for richer mapping.  
+- Integrate with `geopandas` for shapefile overlay or county boundary visualization.
 
 ---
 
 ## 👨‍💻 Author
-
-**Akshay Kumar Mundrathi**
-Oklahoma State University
-Data & AI / Automation / Geospatial Analysis
-
+**Akshay Kumar Mundrathi**  
+Oklahoma State University  
+Data & AI / Automation / Geospatial Analysis  
