@@ -1,63 +1,60 @@
 # Oklahoma Well Locations Extraction and Map
 
-## 📌 Project Overview
+##📌 Project Overview
 
 This project automates the extraction of well location information from Oklahoma well report PDFs. It parses metadata such as County, Section, Township, Range, and GPS coordinates from the reports, then generates:
 
 - A structured Excel/CSV file with the extracted data  
 - An interactive map (HTML) showing all well locations visually
 
-## 🏆 Features
+##🏆 Features
 
 ✅ Automated PDF parsing and extraction  
 ✅ Robust coordinate extraction from embedded URLs  
 ✅ Saves clean, tabular data for easy analysis  
 ✅ Creates an interactive Folium web map with clickable markers
 
-## 🛠️ Tech Stack
+##🛠️ Tech Stack
 
 - **Python** (PyMuPDF, pandas, regex, folium)  
 - **JavaScript/HTML** (Folium-generated map)  
 - Google Drive, GitHub for hosting and sharing
 
-## 🚀 Getting Started
+##🚀 Getting Started
 
-### 1️⃣ Clone the Repository
+###1️⃣ Clone the Repository
 
 git clone https://github.com/Akshaykumarmundrathi/Oklahoma-Well-Locations.git
 cd Oklahoma-Well-Locations
 
 text
 
-### 2️⃣ Install Dependencies
+###2️⃣ Install Dependencies
 
 pip install -r requirements.txt
 
-text
-
-### 3️⃣ Place the Input PDF
+###3️⃣ Place the Input PDF
 
 Put your well report PDF (e.g., `PDFs_Well_Location_20250523_140405.pdf`) in the project folder.
 
-### 4️⃣ Run the Extraction Script
+###4️⃣ Run the Extraction Script
 
 python oklahoma_well_location_map.py
 
-text
 
 This will generate the extracted Excel/CSV and interactive map files.
 
-## 📊 Visualization
+##📊 Visualization
 
 Open the generated `.html` map file in your web browser to interact with well locations on a map.
 
-## ⚠️ Limitations
+##⚠️ Limitations
 
 - Some report fields may be missing due to PDF format variations or incomplete extraction.  
 - Coordinates are extracted only if URLs in the PDF follow expected formats.  
 - The extraction assumes consistent report formatting. Irregularities may require tweaking regex patterns.
 
-## 🤝 Contributing
+##🤝 Contributing
 
 Pull requests and issues are welcome! Feel free to suggest improvements or help expand the extraction capabilities.
 
